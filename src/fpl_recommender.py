@@ -891,6 +891,7 @@ if __name__ == "__main__":
     TEAM_ID = 1234578987 # <-- CHANGE THIS TO YOUR TEAM ID
     USE_WEB_DATA = False # TODO: Set to False to till web scraping devo is completed
     USE_CACHE = False # Set to False to force fresh data
+    SCOUT_URL = None # Provide with latest gameweek's FPL scout URL. Example: https://www.premierleague.com/en/news/4431786/scout-selection-best-fantasy-team-for-gameweek-7
     
     print(f"\nConfiguration:")
     print(f"  Team ID: {TEAM_ID}")
@@ -919,8 +920,11 @@ if __name__ == "__main__":
         
         # Import web scrapers
         from fpl_web_scraper import (
-            ScraperAggregator, 
-            FantasyFootballScoutScraper,
+            ScraperAggregator,
+        )
+
+        from fpl_scout_scraper import (
+            OfficialPremierLeagueScoutScraper
         )
         
         # Check for cached web data
@@ -937,7 +941,7 @@ if __name__ == "__main__":
             
             # Add all scrapers
             scrapers = [
-                FantasyFootballScoutScraper(),
+                OfficialPremierLeagueScoutScraper(scout_url=SCOUT_URL),
             ]
             
             print("Sources to scrape:")
