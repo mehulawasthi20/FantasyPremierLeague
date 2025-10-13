@@ -109,7 +109,7 @@ class FPLRecommender:
             self.data = response.json()
             
             self.current_gameweek = next(
-                (gw['id'] for gw in self.data['events'] if gw['is_current']), 
+                (gw['id'] for gw in self.data['events'] if gw['is_next']),
                 None
             )
             if not self.current_gameweek:
