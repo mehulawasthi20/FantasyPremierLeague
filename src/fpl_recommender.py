@@ -109,7 +109,7 @@ class FPLRecommender:
             self.data = response.json()
             
             self.current_gameweek = next(
-                (gw['id'] for gw in self.data['events'] if gw['is_next']),
+                (gw['id'] for gw in self.data['events'] if gw['is_current']),
                 None
             )
             if not self.current_gameweek:
@@ -889,7 +889,7 @@ if __name__ == "__main__":
     
     # Configuration
     TEAM_ID = 1234578987 # <-- CHANGE THIS TO YOUR TEAM ID
-    USE_WEB_DATA = False # TODO: Set to False to till web scraping devo is completed
+    USE_WEB_DATA = True
     USE_CACHE = False # Set to False to force fresh data
     SCOUT_URL = None # Provide with latest gameweek's FPL scout URL. Example: https://www.premierleague.com/en/news/4431786/scout-selection-best-fantasy-team-for-gameweek-7
     
@@ -902,7 +902,7 @@ if __name__ == "__main__":
     print(f"\n{'='*120}")
     print("STEP 1: Initializing FPL Recommender")
     print(f"{'='*120}")
-    recommender = FPLRecommender(team_id=TEAM_ID, use_web_data=False) #TODO: replace with USE_WEB_DATA boolean
+    recommender = FPLRecommender(team_id=TEAM_ID, use_web_data=USE_WEB_DATA)
     
     # Fetch FPL data
     print("\nFetching FPL data...")
